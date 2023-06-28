@@ -1,5 +1,5 @@
-a2a3
-h2h3
+a8a7
+h1h2
 e2e4
 e7e5
 b1c3
