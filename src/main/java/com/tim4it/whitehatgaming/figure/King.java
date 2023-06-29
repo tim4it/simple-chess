@@ -3,12 +3,14 @@ package com.tim4it.whitehatgaming.figure;
 import com.tim4it.whitehatgaming.Board;
 import com.tim4it.whitehatgaming.Color;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
 
 @Value
 @Builder(toBuilder = true)
-public class King implements Board {
+@EqualsAndHashCode(callSuper = true)
+public class King extends AbstractFigure {
 
     @NonNull
     Color color;

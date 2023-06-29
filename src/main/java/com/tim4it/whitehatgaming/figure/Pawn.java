@@ -5,12 +5,15 @@ import com.tim4it.whitehatgaming.Color;
 import com.tim4it.whitehatgaming.empty.EmptyCell;
 import com.tim4it.whitehatgaming.util.Helper;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
 
+
 @Value
 @Builder(toBuilder = true)
-public class Pawn implements Board {
+@EqualsAndHashCode(callSuper = true)
+public class Pawn extends AbstractFigure {
 
     @NonNull
     Color color;
