@@ -25,7 +25,7 @@ board is represented in the input data.
 
 ## Build the projects
 
-Clean build the projects with tests
+Clean build the projects with all tests
 
 ```
 ./gradlew clean build
@@ -43,3 +43,9 @@ Run with custom sample moves - support multiple files:
 ./gradlew run --args="my-moves.txt"
 ./gradlew run --args="my-moves.txt sample-moves.txt"
 ```
+## Checkmate
+
+- Check if the king is under attack
+- Check if the king can move to any safe square
+- Check if any friendly piece can block the attack
+- Check if any piece can capture the attacking piece

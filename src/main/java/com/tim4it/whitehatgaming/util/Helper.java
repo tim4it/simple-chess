@@ -33,9 +33,9 @@ public class Helper {
      *
      * @param row    board row
      * @param column board column
-     * @return true if row, column is within boundaries
+     * @return true if, row and column is within boundaries
      */
-    public boolean isValidBoardCoordinate(int row, int column) {
+    public boolean isInvalidBoardCoordinate(int row, int column) {
         return row < 0 || row > 7 || column < 0 || column > 7;
     }
 }

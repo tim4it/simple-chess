@@ -7,7 +7,7 @@ import static com.tim4it.whitehatgaming.util.Helper.*
 
 class QueenTest extends Specification {
 
-    def "queen valid/invalid move testing"() {
+    def "Queen valid/invalid move testing"() {
         given:
         def board = getBoard()
         def queenSource = board[4][3]
@@ -16,7 +16,8 @@ class QueenTest extends Specification {
         def isValidMove = queenSource.isValidMove(board, moves)
 
         then:
-        isValidMove == expextedMoveValid
+        queenSource instanceof Queen
+        isValidMove.getFirst() == expextedMoveValid
 
         where:
         moves                 | expextedMoveValid
@@ -65,6 +66,8 @@ class QueenTest extends Specification {
         new int[]{4, 3, 2, 0} | false
         new int[]{4, 3, 3, 0} | false
         new int[]{4, 3, 5, 1} | false
+        new int[]{4, 3, 8, 1} | false
+        new int[]{4, 3, 3, 9} | false
     }
 
     def getBoard() {

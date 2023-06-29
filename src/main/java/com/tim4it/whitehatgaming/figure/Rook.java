@@ -2,12 +2,13 @@ package com.tim4it.whitehatgaming.figure;
 
 import com.tim4it.whitehatgaming.Board;
 import com.tim4it.whitehatgaming.Color;
-import com.tim4it.whitehatgaming.empty.EmptyCell;
-import com.tim4it.whitehatgaming.util.Helper;
+import com.tim4it.whitehatgaming.util.Pair;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
+
+import java.util.Arrays;
 
 @Value
 @Builder(toBuilder = true)
@@ -18,24 +19,22 @@ public class Rook extends AbstractFigure {
     Color color;
 
     @Override
-    public boolean isValidMove(Board[][] chessboard, int[] moves) {
+    public Pair<Boolean, String> isValidMove(Board[][] chessboard, int[] moves) {
         // Extracting the source and destination coordinates from the move
         int sourceRow = moves[0], sourceColumn = moves[1];
         int destinationRow = moves[2], destinationColumn = moves[3];
-        // Checking if the source and destination coordinates are within the board boundaries
-        if (Helper.isValidBoardCoordinate(sourceRow, sourceColumn) ||
-                Helper.isValidBoardCoordinate(destinationRow, destinationColumn)) {
-            return false;
+        if (isOutOfBoundaries(sourceRow, sourceColumn, destinationRow, destinationColumn)) {
+            return new Pair<>(false, "Wrong source and destination rook move: " + Arrays.toString(moves));
         }
-        // Checking if the piece at the source coordinate is a queen
+        // Checking if the piece at the source coordinate is a rook
         if (!chessboard[sourceRow][sourceColumn].toString().equals(this.toString())) {
-            return false;
+            return new Pair<>(false, "Expected rook, got " + chessboard[sourceRow][sourceColumn].toString());
         }
         // Checking if the move is valid horizontally, vertically, or diagonally
         if (sourceRow == destinationRow || sourceColumn == destinationColumn) {
             return isClearPath(chessboard, moves);
         }
-        return false;
+        return new Pair<>(false, "Invalid rook move " + Arrays.toString(moves));
     }
 
     /**
@@ -43,37 +42,32 @@ public class Rook extends AbstractFigure {
      *
      * @param chessboard chess board with current figures
      * @param moves      moves - source to destination
-     * @return true if move is validated
+     * @return pair data first - true if move is validated
      */
-    private boolean isClearPath(Board[][] chessboard, int[] moves) {
+    private Pair<Boolean, String> isClearPath(Board[][] chessboard, int[] moves) {
         int sourceRow = moves[0], sourceColumn = moves[1];
         int destinationRow = moves[2], destinationColumn = moves[3];
-        var emptyCellString = EmptyCell.builder().build().toString();
         if (sourceRow == destinationRow) {
-            // Checking if the path is clear horizontally
-            int startColumn = Math.min(sourceColumn, destinationColumn);
-            int endColumn = Math.max(sourceColumn, destinationColumn);
-            for (int col = startColumn + 1; col < endColumn; col++) {
-                if (!chessboard[sourceRow][col].toString().equals(emptyCellString)) {
-                    return false;
-                }
+            // Clear horizontally
+            if (isPathNotClearStraight(chessboard, sourceColumn, destinationColumn, sourceRow, true)) {
+                return new Pair<>(false, "Invalid rook horizontal move " + Arrays.toString(moves));
             }
         } else if (sourceColumn == destinationColumn) {
-            // Checking if the path is clear vertically
-            int startRow = Math.min(sourceRow, destinationRow);
-            int endRow = Math.max(sourceRow, destinationRow);
-            for (int row = startRow + 1; row < endRow; row++) {
-                if (!chessboard[row][sourceColumn].toString().equals(emptyCellString)) {
-                    return false;
-                }
+            // Clear vertically
+            if (isPathNotClearStraight(chessboard, sourceRow, destinationRow, sourceColumn, false)) {
+                return new Pair<>(false, "Invalid rook vertical move " + Arrays.toString(moves));
             }
         } else {
-            return false;
+            return new Pair<>(false, "Invalid rook move " + Arrays.toString(moves));
         }
         // ensure that the destination cell is either empty or contains a piece of the opposing color
         var destinationCell = chessboard[destinationRow][destinationColumn];
-        return destinationCell.toString().equals(emptyCellString) ||
+        var destinationMoveCheck = destinationCell.toString().equals(EMPTY_CELL_STRING) ||
                 !destinationCell.getColor().equals(this.getColor());
+        if (!destinationMoveCheck) {
+            return new Pair<>(false, "Invalid rook destination move " + Arrays.toString(moves));
+        }
+        return new Pair<>(true, null);
     }
 
     @Override
