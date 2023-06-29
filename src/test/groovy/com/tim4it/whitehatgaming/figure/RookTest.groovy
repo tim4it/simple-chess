@@ -46,6 +46,8 @@ class RookTest extends Specification {
         new int[]{4, 3, 5, 2} | false
         new int[]{4, 3, 5, 7} | false
         new int[]{4, 3, 1, 4} | false
+        new int[]{4, 3, 8, 1} | false
+        new int[]{4, 3, 3, 9} | false
     }
 
     def getBoard() {

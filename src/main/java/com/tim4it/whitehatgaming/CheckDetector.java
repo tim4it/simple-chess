@@ -1,5 +1,6 @@
 package com.tim4it.whitehatgaming;
 
+import com.tim4it.whitehatgaming.empty.EmptyCell;
 import com.tim4it.whitehatgaming.figure.Bishop;
 import com.tim4it.whitehatgaming.figure.Knight;
 import com.tim4it.whitehatgaming.figure.Pawn;
@@ -13,6 +14,8 @@ import lombok.Value;
 @Value
 @Builder
 public class CheckDetector {
+
+    static final String EMPTY_CELL_STRING = EmptyCell.builder().build().toString();
 
     @NonNull
     Color color;
@@ -41,7 +44,7 @@ public class CheckDetector {
         for (int row = 0; row < 8; row++) {
             for (int column = 0; column < 8; column++) {
                 var piece = chessboard[row][column];
-                if (isPieceAttackKing(piece, row, column, kingRow, kingColumn)) {
+                if (isPieceAttackKing(chessboard, piece, row, column, kingRow, kingColumn)) {
                     return true;
                 }
             }
@@ -59,18 +62,18 @@ public class CheckDetector {
      * @param kingColumn  found king column
      * @return true if one of the pieces valid attacked the opposite king
      */
-    private boolean isPieceAttackKing(@NonNull Board piece,
+    private boolean isPieceAttackKing(@NonNull Board[][] chessboard, @NonNull Board piece,
                                       int pieceRow, int pieceColumn, int kingRow, int kingColumn) {
         if (piece.toString().equals(Pawn.builder().color(getColor()).build().toString())) {
             return isPawnAttack(pieceRow, pieceColumn, kingRow, kingColumn);
         } else if (piece.toString().equals(Knight.builder().color(getColor()).build().toString())) {
             return isKnightAttack(pieceRow, pieceColumn, kingRow, kingColumn);
         } else if (piece.toString().equals(Bishop.builder().color(getColor()).build().toString())) {
-            return isBishopAttack(pieceRow, pieceColumn, kingRow, kingColumn);
+            return isBishopAttack(chessboard, pieceRow, pieceColumn, kingRow, kingColumn);
         } else if (piece.toString().equals(Rook.builder().color(getColor()).build().toString())) {
-            return isRookAttack(pieceRow, pieceColumn, kingRow, kingColumn);
+            return isRookAttack(chessboard, pieceRow, pieceColumn, kingRow, kingColumn);
         } else if (piece.toString().equals(Queen.builder().color(getColor()).build().toString())) {
-            return isQueenAttack(pieceRow, pieceColumn, kingRow, kingColumn);
+            return isQueenAttack(chessboard, pieceRow, pieceColumn, kingRow, kingColumn);
         } else {
             return false;
         }
@@ -88,18 +91,87 @@ public class CheckDetector {
         return (rowDiff == 2 && columnDiff == 1) || (rowDiff == 1 && columnDiff == 2);
     }
 
-    private boolean isBishopAttack(int bishopRow, int bishopColumn, int kingRow, int kingColumn) {
+    private boolean isBishopAttack(@NonNull Board[][] chessboard,
+                                   int bishopRow, int bishopColumn, int kingRow, int kingColumn) {
         var rowDiff = Math.abs(bishopRow - kingRow);
         var columnDiff = Math.abs(bishopColumn - kingColumn);
-        return rowDiff == columnDiff;
+        return (rowDiff == columnDiff) &&
+                isClearDiagonalPath(chessboard, bishopRow, bishopColumn, kingRow, kingColumn);
     }
 
-    private boolean isRookAttack(int rookRow, int rookColumn, int kingRow, int kingColumn) {
-        return rookRow == kingRow || rookColumn == kingColumn;
+    private boolean isRookAttack(@NonNull Board[][] chessboard,
+                                 int rookRow, int rookColumn, int kingRow, int kingColumn) {
+        return (rookRow == kingRow || rookColumn == kingColumn) &&
+                isClearStraightPath(chessboard, rookRow, rookColumn, kingRow, kingColumn);
     }
 
-    private boolean isQueenAttack(int queenRow, int queenColumn, int kingRow, int kingColumn) {
-        return isRookAttack(queenRow, queenColumn, kingRow, kingColumn) ||
-                isBishopAttack(queenRow, queenColumn, kingRow, kingColumn);
+    private boolean isQueenAttack(@NonNull Board[][] chessboard,
+                                  int queenRow, int queenColumn, int kingRow, int kingColumn) {
+        var queenAttack = isRookAttack(chessboard, queenRow, queenColumn, kingRow, kingColumn) ||
+                isBishopAttack(chessboard, queenRow, queenColumn, kingRow, kingColumn);
+        var clearPathQueenKing = isClearDiagonalPath(chessboard, queenRow, queenColumn, kingRow, kingColumn) ||
+                isClearStraightPath(chessboard, queenRow, queenColumn, kingRow, kingColumn);
+        return queenAttack && clearPathQueenKing;
+    }
+
+    /**
+     * Check if the diagonal path between the figure (source) and destination (king) positions is clear
+     *
+     * @param chessboard   chess board
+     * @param sourceRow    piece/figure source row position
+     * @param sourceColumn piece source column position
+     * @param kingRow      king row position
+     * @param kingColumn   king column position
+     * @return true if position from source figure to king is clear
+     */
+    private boolean isClearDiagonalPath(@NonNull Board[][] chessboard,
+                                        int sourceRow, int sourceColumn, int kingRow, int kingColumn) {
+        var deltaRow = kingRow - sourceRow;
+        var deltaColumn = kingColumn - sourceColumn;
+        var stepRow = deltaRow > 0 ? 1 : -1;
+        var stepColumn = deltaColumn > 0 ? 1 : -1;
+
+        var row = sourceRow + stepRow;
+        var column = sourceColumn + stepColumn;
+        while (row != kingRow && column != kingColumn) {
+            if (!chessboard[row][column].toString().equals(EMPTY_CELL_STRING)) {
+                return false;
+            }
+            row += stepRow;
+            column += stepColumn;
+        }
+        return true;
+    }
+
+    /**
+     * Check if the straight path between the figure (source) and destination (king) positions is clear
+     *
+     * @param chessboard   chess board
+     * @param sourceRow    piece/figure source row position
+     * @param sourceColumn piece/figure source column position
+     * @param kingRow      king row position
+     * @param kingColumn   king column position
+     * @return true if position from source figure to king is clear - straight (horizontally, vertically)
+     */
+    private boolean isClearStraightPath(@NonNull Board[][] chessboard,
+                                        int sourceRow, int sourceColumn, int kingRow, int kingColumn) {
+        if (sourceRow == kingRow) {
+            var startColumn = Math.min(sourceColumn, kingColumn);
+            var endColumn = Math.max(sourceColumn, kingColumn);
+            for (int column = startColumn + 1; column < endColumn; column++) {
+                if (!chessboard[sourceRow][column].toString().equals(EMPTY_CELL_STRING)) {
+                    return false;
+                }
+            }
+        } else {
+            var startRow = Math.min(sourceRow, kingRow);
+            var endRow = Math.max(sourceRow, kingRow);
+            for (int row = startRow + 1; row < endRow; row++) {
+                if (!chessboard[row][sourceColumn].toString().equals(EMPTY_CELL_STRING)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

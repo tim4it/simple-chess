@@ -43,7 +43,7 @@ public class Queen extends AbstractFigure {
      *
      * @param chessboard chess board with current figures
      * @param moves      moves - source to destination
-     * @return pair data first - true if move is validated
+     * @return pair data first - true if move is validated, otherwise move is invalid with error message
      */
     private Pair<Boolean, String> isClearPath(Board[][] chessboard, int[] moves) {
         int sourceRow = moves[0], sourceColumn = moves[1];

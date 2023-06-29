@@ -34,15 +34,21 @@ Clean build the projects with all tests
 ## Run projects
 
 Run with default sample moves file:
-
 ```
 ./gradlew run" 
 ```
+
 Run with custom sample moves - support multiple files:
 ```
 ./gradlew run --args="my-moves.txt"
 ./gradlew run --args="my-moves.txt sample-moves.txt"
 ```
+
+Moves to check:
+```
+./gradlew run --args="check1.txt check2.txt check3.txt"
+```
+
 ## Checkmate
 
 - Check if the king is under attack

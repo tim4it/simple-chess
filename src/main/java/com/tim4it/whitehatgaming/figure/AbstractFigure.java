@@ -17,8 +17,8 @@ public abstract class AbstractFigure implements Board {
      * @param destinationColumn destination column coordinate
      * @return true if move is out of chess board cell, otherwise false
      */
-    public boolean isOutOfBoundaries(int sourceRow, int sourceColumn,
-                                     int destinationRow, int destinationColumn) {
+    protected boolean isOutOfBoundaries(int sourceRow, int sourceColumn,
+                                        int destinationRow, int destinationColumn) {
         return Helper.isInvalidBoardCoordinate(sourceRow, sourceColumn) ||
                 Helper.isInvalidBoardCoordinate(destinationRow, destinationColumn);
     }
