@@ -1,6 +1,7 @@
 package com.tim4it.whitehatgaming.figure
 
 import com.tim4it.whitehatgaming.Board
+import com.tim4it.whitehatgaming.util.Moves
 import spock.lang.Specification
 
 import static com.tim4it.whitehatgaming.util.Helper.*
@@ -21,14 +22,14 @@ class PawnTest extends Specification {
 
         where:
         moves                 | expextedMoveValid
-        new int[]{4, 3, 3, 3} | true
-        new int[]{4, 3, 3, 2} | true
-        new int[]{4, 3, 3, 4} | false
-        new int[]{4, 3, 5, 3} | false
-        new int[]{4, 3, 5, 4} | false
-        new int[]{4, 3, 5, 2} | false
-        new int[]{4, 3, 4, 2} | false
-        new int[]{4, 3, 4, 4} | false
+        new Moves(4, 3, 3, 3) | true
+        new Moves(4, 3, 3, 2) | true
+        new Moves(4, 3, 3, 4) | false
+        new Moves(4, 3, 5, 3) | false
+        new Moves(4, 3, 5, 4) | false
+        new Moves(4, 3, 5, 2) | false
+        new Moves(4, 3, 4, 2) | false
+        new Moves(4, 3, 4, 4) | false
     }
 
     def "Pawn valid/invalid move testing - white initial one/two step"() {
@@ -45,13 +46,13 @@ class PawnTest extends Specification {
 
         where:
         moves                 | expextedMoveValid
-        new int[]{6, 0, 4, 0} | true
-        new int[]{6, 0, 5, 0} | true
-        new int[]{6, 0, 3, 0} | false
-        new int[]{6, 0, 2, 0} | false
-        new int[]{6, 0, 1, 0} | false
-        new int[]{6, 0, 0, 0} | false
-        new int[]{6, 0, 5, 1} | false
+        new Moves(6, 0, 4, 0) | true
+        new Moves(6, 0, 5, 0) | true
+        new Moves(6, 0, 3, 0) | false
+        new Moves(6, 0, 2, 0) | false
+        new Moves(6, 0, 1, 0) | false
+        new Moves(6, 0, 0, 0) | false
+        new Moves(6, 0, 5, 1) | false
     }
 
     def "Pawn valid/invalid move testing - black"() {
@@ -68,14 +69,14 @@ class PawnTest extends Specification {
 
         where:
         moves                 | expextedMoveValid
-        new int[]{2, 3, 3, 3} | true
-        new int[]{2, 3, 3, 4} | true
-        new int[]{2, 3, 3, 2} | false
-        new int[]{2, 3, 4, 3} | false
-        new int[]{2, 3, 5, 3} | false
-        new int[]{2, 3, 6, 3} | false
-        new int[]{2, 3, 4, 1} | false
-        new int[]{2, 3, 4, 5} | false
+        new Moves(2, 3, 3, 3) | true
+        new Moves(2, 3, 3, 4) | true
+        new Moves(2, 3, 3, 2) | false
+        new Moves(2, 3, 4, 3) | false
+        new Moves(2, 3, 5, 3) | false
+        new Moves(2, 3, 6, 3) | false
+        new Moves(2, 3, 4, 1) | false
+        new Moves(2, 3, 4, 5) | false
     }
 
     def "Pawn valid/invalid move testing - black initial one/two step"() {
@@ -92,15 +93,15 @@ class PawnTest extends Specification {
 
         where:
         moves                 | expextedMoveValid
-        new int[]{1, 6, 3, 6} | true
-        new int[]{1, 6, 2, 6} | true
-        new int[]{1, 6, 2, 5} | false
-        new int[]{1, 6, 2, 7} | false
-        new int[]{1, 6, 4, 6} | false
-        new int[]{1, 6, 5, 6} | false
-        new int[]{1, 6, 6, 6} | false
-        new int[]{1, 6, 3, 5} | false
-        new int[]{1, 6, 3, 7} | false
+        new Moves(1, 6, 3, 6) | true
+        new Moves(1, 6, 2, 6) | true
+        new Moves(1, 6, 2, 5) | false
+        new Moves(1, 6, 2, 7) | false
+        new Moves(1, 6, 4, 6) | false
+        new Moves(1, 6, 5, 6) | false
+        new Moves(1, 6, 6, 6) | false
+        new Moves(1, 6, 3, 5) | false
+        new Moves(1, 6, 3, 7) | false
     }
 
     def getBoard() {

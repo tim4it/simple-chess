@@ -2,6 +2,7 @@ package com.tim4it.whitehatgaming.empty;
 
 import com.tim4it.whitehatgaming.Board;
 import com.tim4it.whitehatgaming.Color;
+import com.tim4it.whitehatgaming.util.Moves;
 import com.tim4it.whitehatgaming.util.Pair;
 import lombok.Builder;
 import lombok.Value;
@@ -16,7 +17,7 @@ public class EmptyCell implements Board {
     }
 
     @Override
-    public Pair<Boolean, String> isValidMove(Board[][] chessboard, int[] moves) {
+    public Pair<Boolean, String> isValidMove(Board[][] chessboard, Moves moves) {
         throw new IllegalStateException("Empty cell does not have valid move information!");
     }
 

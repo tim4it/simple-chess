@@ -1,6 +1,7 @@
 package com.tim4it.whitehatgaming.figure
 
 import com.tim4it.whitehatgaming.Board
+import com.tim4it.whitehatgaming.util.Moves
 import spock.lang.Specification
 
 import static com.tim4it.whitehatgaming.util.Helper.*
@@ -22,52 +23,52 @@ class QueenTest extends Specification {
         where:
         moves                 | expextedMoveValid
         // straight down
-        new int[]{4, 3, 5, 3} | true
-        new int[]{4, 3, 6, 3} | true
-        new int[]{4, 3, 7, 3} | true
+        new Moves(4, 3, 5, 3) | true
+        new Moves(4, 3, 6, 3) | true
+        new Moves(4, 3, 7, 3) | true
         // diagonal
-        new int[]{4, 3, 5, 4} | true
-        new int[]{4, 3, 5, 2} | true
-        new int[]{4, 3, 2, 1} | true
-        new int[]{4, 3, 2, 5} | true
-        new int[]{4, 3, 3, 2} | true
-        new int[]{4, 3, 3, 4} | true
-        new int[]{4, 3, 1, 0} | true
-        new int[]{4, 3, 1, 6} | true
+        new Moves(4, 3, 5, 4) | true
+        new Moves(4, 3, 5, 2) | true
+        new Moves(4, 3, 2, 1) | true
+        new Moves(4, 3, 2, 5) | true
+        new Moves(4, 3, 3, 2) | true
+        new Moves(4, 3, 3, 4) | true
+        new Moves(4, 3, 1, 0) | true
+        new Moves(4, 3, 1, 6) | true
         // straight up
-        new int[]{4, 3, 3, 3} | true
+        new Moves(4, 3, 3, 3) | true
         // non valid queen moves straight up
-        new int[]{4, 3, 2, 3} | false
-        new int[]{4, 3, 1, 3} | false
-        new int[]{4, 3, 0, 3} | false
+        new Moves(4, 3, 2, 3) | false
+        new Moves(4, 3, 1, 3) | false
+        new Moves(4, 3, 0, 3) | false
         // non valid queen moves left
-        new int[]{4, 3, 4, 2} | false
-        new int[]{4, 3, 4, 1} | false
-        new int[]{4, 3, 4, 0} | false
+        new Moves(4, 3, 4, 2) | false
+        new Moves(4, 3, 4, 1) | false
+        new Moves(4, 3, 4, 0) | false
         // non valid queen moves right
-        new int[]{4, 3, 4, 4} | false
-        new int[]{4, 3, 4, 5} | false
-        new int[]{4, 3, 4, 6} | false
-        new int[]{4, 3, 4, 7} | false
-        new int[]{4, 3, 4, 8} | false
+        new Moves(4, 3, 4, 4) | false
+        new Moves(4, 3, 4, 5) | false
+        new Moves(4, 3, 4, 6) | false
+        new Moves(4, 3, 4, 7) | false
+        new Moves(4, 3, 4, 8) | false
         // non valid queen moves diagonal left
-        new int[]{4, 3, 6, 1} | false
-        new int[]{4, 3, 7, 0} | false
+        new Moves(4, 3, 6, 1) | false
+        new Moves(4, 3, 7, 0) | false
         // non valid queen moves diagonal right
-        new int[]{4, 3, 6, 5} | false
-        new int[]{4, 3, 7, 6} | false
+        new Moves(4, 3, 6, 5) | false
+        new Moves(4, 3, 7, 6) | false
         // non valid queen moves random on board
-        new int[]{4, 3, 4, 3} | false
-        new int[]{4, 3, 2, 6} | false
-        new int[]{4, 3, 2, 7} | false
-        new int[]{4, 3, 3, 5} | false
-        new int[]{4, 3, 3, 6} | false
-        new int[]{4, 3, 3, 7} | false
-        new int[]{4, 3, 2, 0} | false
-        new int[]{4, 3, 3, 0} | false
-        new int[]{4, 3, 5, 1} | false
-        new int[]{4, 3, 8, 1} | false
-        new int[]{4, 3, 3, 9} | false
+        new Moves(4, 3, 4, 3) | false
+        new Moves(4, 3, 2, 6) | false
+        new Moves(4, 3, 2, 7) | false
+        new Moves(4, 3, 3, 5) | false
+        new Moves(4, 3, 3, 6) | false
+        new Moves(4, 3, 3, 7) | false
+        new Moves(4, 3, 2, 0) | false
+        new Moves(4, 3, 3, 0) | false
+        new Moves(4, 3, 5, 1) | false
+        new Moves(4, 3, 8, 1) | false
+        new Moves(4, 3, 3, 9) | false
     }
 
     def getBoard() {

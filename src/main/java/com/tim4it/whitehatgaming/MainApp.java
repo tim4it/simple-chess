@@ -13,7 +13,11 @@ public class MainApp {
         } else {
             for (String arg : args) {
                 if (new File(DEFAULT_MOVES_DIR + arg).exists()) {
-                    new PlayGame(DEFAULT_MOVES_DIR + arg).action();
+                    try {
+                        new PlayGame(DEFAULT_MOVES_DIR + arg).action();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     throw new IllegalArgumentException("Chess file (" + DEFAULT_MOVES_DIR + arg +
                             ") with moves does not exists!");

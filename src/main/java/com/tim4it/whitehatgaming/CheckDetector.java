@@ -31,8 +31,8 @@ public class CheckDetector {
         int kingColumn = -1;
         var attackedKing = getColor().equals(Color.WHITE) ? Helper.k : Helper.K;
         // Find the position of the king
-        for (int row = 0; row < 8; row++) {
-            for (int column = 0; column < 8; column++) {
+        for (var row = 0; row < 8; row++) {
+            for (var column = 0; column < 8; column++) {
                 if (chessboard[row][column].toString().equals(attackedKing.toString())) {
                     kingRow = row;
                     kingColumn = column;
@@ -41,8 +41,8 @@ public class CheckDetector {
             }
         }
         // Check for pieces attacking the king
-        for (int row = 0; row < 8; row++) {
-            for (int column = 0; column < 8; column++) {
+        for (var row = 0; row < 8; row++) {
+            for (var column = 0; column < 8; column++) {
                 var piece = chessboard[row][column];
                 if (isPieceAttackKing(chessboard, piece, row, column, kingRow, kingColumn)) {
                     return true;
@@ -158,7 +158,7 @@ public class CheckDetector {
         if (sourceRow == kingRow) {
             var startColumn = Math.min(sourceColumn, kingColumn);
             var endColumn = Math.max(sourceColumn, kingColumn);
-            for (int column = startColumn + 1; column < endColumn; column++) {
+            for (var column = startColumn + 1; column < endColumn; column++) {
                 if (!chessboard[sourceRow][column].toString().equals(EMPTY_CELL_STRING)) {
                     return false;
                 }
@@ -166,7 +166,7 @@ public class CheckDetector {
         } else {
             var startRow = Math.min(sourceRow, kingRow);
             var endRow = Math.max(sourceRow, kingRow);
-            for (int row = startRow + 1; row < endRow; row++) {
+            for (var row = startRow + 1; row < endRow; row++) {
                 if (!chessboard[row][sourceColumn].toString().equals(EMPTY_CELL_STRING)) {
                     return false;
                 }

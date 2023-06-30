@@ -46,7 +46,12 @@ Run with custom sample moves - support multiple files:
 
 Moves to check:
 ```
-./gradlew run --args="check1.txt check2.txt check3.txt"
+./gradlew run --args="check1.txt check2.txt check3.txt checkmate.txt"
+```
+
+Invalid moves:
+```
+./gradlew run --args="sample-empty-selected.txt sample-moves-invalid.txt sample-moves-invalid1.txt"
 ```
 
 ## Checkmate

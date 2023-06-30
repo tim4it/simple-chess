@@ -1,5 +1,6 @@
 package com.tim4it.whitehatgaming;
 
+import com.tim4it.whitehatgaming.util.Moves;
 import com.tim4it.whitehatgaming.util.Pair;
 
 public interface Board {
@@ -18,5 +19,5 @@ public interface Board {
      * @param moves      current moves - source to destination coordinates
      * @return pair of data - if move is valid (validated), return true, otherwise move is invalid with error message
      */
-    Pair<Boolean, String> isValidMove(Board[][] chessboard, int[] moves);
+    Pair<Boolean, String> isValidMove(Board[][] chessboard, Moves moves);
 }

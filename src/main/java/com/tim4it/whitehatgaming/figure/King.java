@@ -2,13 +2,12 @@ package com.tim4it.whitehatgaming.figure;
 
 import com.tim4it.whitehatgaming.Board;
 import com.tim4it.whitehatgaming.Color;
+import com.tim4it.whitehatgaming.util.Moves;
 import com.tim4it.whitehatgaming.util.Pair;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
-
-import java.util.Arrays;
 
 @Value
 @Builder(toBuilder = true)
@@ -19,11 +18,13 @@ public class King extends AbstractFigure {
     Color color;
 
     @Override
-    public Pair<Boolean, String> isValidMove(Board[][] chessboard, int[] moves) {
-        int sourceRow = moves[0], sourceColumn = moves[1];
-        int destinationRow = moves[2], destinationColumn = moves[3];
+    public Pair<Boolean, String> isValidMove(@NonNull Board[][] chessboard, @NonNull Moves moves) {
+        var sourceRow = moves.getSourceRow();
+        var sourceColumn = moves.getSourceColumn();
+        var destinationRow = moves.getDestinationRow();
+        var destinationColumn = moves.getDestinationColumn();
         if (isOutOfBoundaries(sourceRow, sourceColumn, destinationRow, destinationColumn)) {
-            return new Pair<>(false, "Wrong source and destination king move: " + Arrays.toString(moves));
+            return new Pair<>(false, "Wrong source and destination king move: " + moves);
         }
         // Checking if the piece at the source coordinate is a king
         if (!chessboard[sourceRow][sourceColumn].toString().equals(this.toString())) {
@@ -40,11 +41,11 @@ public class King extends AbstractFigure {
             var destinationMoveCheck = destinationCell.toString().equals(EMPTY_CELL_STRING) ||
                     !destinationCell.getColor().equals(this.getColor());
             if (!destinationMoveCheck) {
-                return new Pair<>(false, "Invalid king destination move " + Arrays.toString(moves));
+                return new Pair<>(false, "Invalid king destination move " + moves);
             }
             return new Pair<>(true, null);
         }
-        return new Pair<>(false, "Invalid king move " + Arrays.toString(moves));
+        return new Pair<>(false, "Invalid king move " + moves);
     }
 
     @Override

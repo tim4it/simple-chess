@@ -2,13 +2,12 @@ package com.tim4it.whitehatgaming.figure;
 
 import com.tim4it.whitehatgaming.Board;
 import com.tim4it.whitehatgaming.Color;
+import com.tim4it.whitehatgaming.util.Moves;
 import com.tim4it.whitehatgaming.util.Pair;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.Value;
-
-import java.util.Arrays;
 
 
 @Value
@@ -20,11 +19,13 @@ public class Pawn extends AbstractFigure {
     Color color;
 
     @Override
-    public Pair<Boolean, String> isValidMove(Board[][] chessboard, int[] moves) {
-        int sourceRow = moves[0], sourceColumn = moves[1];
-        int destinationRow = moves[2], destinationColumn = moves[3];
+    public Pair<Boolean, String> isValidMove(@NonNull Board[][] chessboard, @NonNull Moves moves) {
+        var sourceRow = moves.getSourceRow();
+        var sourceColumn = moves.getSourceColumn();
+        var destinationRow = moves.getDestinationRow();
+        var destinationColumn = moves.getDestinationColumn();
         if (isOutOfBoundaries(sourceRow, sourceColumn, destinationRow, destinationColumn)) {
-            return new Pair<>(false, "Wrong source and destination pawn move: " + Arrays.toString(moves));
+            return new Pair<>(false, "Wrong source and destination pawn move: " + moves);
         }
         // Checking if the piece at the source coordinate is a pawn
         if (!chessboard[sourceRow][sourceColumn].toString().equals(this.toString())) {
@@ -63,7 +64,7 @@ public class Pawn extends AbstractFigure {
                 (!destinationCell.getColor().equals(this.getColor()))) {
             return new Pair<>(true, null);
         }
-        return new Pair<>(false, "Invalid pawn move " + Arrays.toString(moves));
+        return new Pair<>(false, "Invalid pawn move " + moves);
     }
 
     @Override

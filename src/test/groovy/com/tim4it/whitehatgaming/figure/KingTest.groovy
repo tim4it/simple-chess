@@ -1,6 +1,7 @@
 package com.tim4it.whitehatgaming.figure
 
 import com.tim4it.whitehatgaming.Board
+import com.tim4it.whitehatgaming.util.Moves
 import spock.lang.Specification
 
 import static com.tim4it.whitehatgaming.util.Helper.K
@@ -25,18 +26,18 @@ class KingTest extends Specification {
 
         where:
         moves                 | expextedMoveValid
-        new int[]{4, 4, 3, 3} | true
-        new int[]{4, 4, 3, 4} | true
-        new int[]{4, 4, 3, 5} | true
-        new int[]{4, 4, 4, 3} | true
-        new int[]{4, 4, 5, 4} | true
-        new int[]{4, 4, 5, 5} | true
-        new int[]{4, 4, 5, 3} | false
-        new int[]{4, 4, 4, 5} | false
-        new int[]{4, 4, 4, 2} | false
-        new int[]{4, 4, 2, 4} | false
-        new int[]{4, 4, 2, 6} | false
-        new int[]{4, 4, 2, 7} | false
+        new Moves(4, 4, 3, 3) | true
+        new Moves(4, 4, 3, 4) | true
+        new Moves(4, 4, 3, 5) | true
+        new Moves(4, 4, 4, 3) | true
+        new Moves(4, 4, 5, 4) | true
+        new Moves(4, 4, 5, 5) | true
+        new Moves(4, 4, 5, 3) | false
+        new Moves(4, 4, 4, 5) | false
+        new Moves(4, 4, 4, 2) | false
+        new Moves(4, 4, 2, 4) | false
+        new Moves(4, 4, 2, 6) | false
+        new Moves(4, 4, 2, 7) | false
     }
 
     def getBoard() {

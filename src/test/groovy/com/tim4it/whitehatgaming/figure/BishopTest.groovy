@@ -1,6 +1,7 @@
 package com.tim4it.whitehatgaming.figure
 
 import com.tim4it.whitehatgaming.Board
+import com.tim4it.whitehatgaming.util.Moves
 import spock.lang.Specification
 
 import static com.tim4it.whitehatgaming.util.Helper.*
@@ -22,33 +23,33 @@ class BishopTest extends Specification {
         where:
         moves                 | expextedMoveValid
         // left diagonal
-        new int[]{4, 3, 3, 2} | true
-        new int[]{4, 3, 2, 1} | true
-        new int[]{4, 3, 1, 0} | true
+        new Moves(4, 3, 3, 2) | true
+        new Moves(4, 3, 2, 1) | true
+        new Moves(4, 3, 1, 0) | true
         // right diagonal
-        new int[]{4, 3, 3, 4} | true
-        new int[]{4, 3, 2, 5} | true
-        new int[]{4, 3, 1, 6} | true
+        new Moves(4, 3, 3, 4) | true
+        new Moves(4, 3, 2, 5) | true
+        new Moves(4, 3, 1, 6) | true
         // left diagonal down
-        new int[]{4, 3, 5, 2} | true
-        new int[]{4, 3, 6, 1} | true
+        new Moves(4, 3, 5, 2) | true
+        new Moves(4, 3, 6, 1) | true
         // right diagonal down
-        new int[]{4, 3, 5, 4} | true
+        new Moves(4, 3, 5, 4) | true
         // non valid moves
-        new int[]{4, 3, 6, 5} | false
-        new int[]{4, 3, 7, 0} | false
-        new int[]{4, 3, 4, 2} | false
-        new int[]{4, 3, 4, 6} | false
-        new int[]{4, 3, 3, 1} | false
-        new int[]{4, 3, 3, 5} | false
-        new int[]{4, 3, 1, 7} | false
-        new int[]{4, 3, 1, 5} | false
-        new int[]{4, 3, 1, 1} | false
-        new int[]{4, 3, 1, 3} | false
-        new int[]{4, 3, 6, 5} | false
-        new int[]{4, 3, 6, 7} | false
-        new int[]{4, 3, 7, 0} | false
-        new int[]{4, 3, 7, 1} | false
+        new Moves(4, 3, 6, 5) | false
+        new Moves(4, 3, 7, 0) | false
+        new Moves(4, 3, 4, 2) | false
+        new Moves(4, 3, 4, 6) | false
+        new Moves(4, 3, 3, 1) | false
+        new Moves(4, 3, 3, 5) | false
+        new Moves(4, 3, 1, 7) | false
+        new Moves(4, 3, 1, 5) | false
+        new Moves(4, 3, 1, 1) | false
+        new Moves(4, 3, 1, 3) | false
+        new Moves(4, 3, 6, 5) | false
+        new Moves(4, 3, 6, 7) | false
+        new Moves(4, 3, 7, 0) | false
+        new Moves(4, 3, 7, 1) | false
     }
 
     def getBoard() {

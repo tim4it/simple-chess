@@ -38,7 +38,7 @@ public abstract class AbstractFigure implements Board {
                                              int sourceRowColumnBoard, boolean isSourceRowColumnBoard) {
         int startColumn = Math.min(sourceRowColumn, destinationRowColumn);
         int endColumn = Math.max(sourceRowColumn, destinationRowColumn);
-        for (int i = startColumn + 1; i < endColumn; i++) {
+        for (var i = startColumn + 1; i < endColumn; i++) {
             var boardCheck = isSourceRowColumnBoard ?
                     chessboard[sourceRowColumnBoard][i] : chessboard[i][sourceRowColumnBoard];
             if (!boardCheck.toString().equals(EMPTY_CELL_STRING)) {
