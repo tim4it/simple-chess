@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-mainClassName = "com.tim4it.whitehatgaming.MainApp"
+mainClassName = "com.tim4it.chess.MainApp"
 
 ext {
     lombok = "1.18.26"

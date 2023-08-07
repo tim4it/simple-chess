@@ -1,7 +1,7 @@
-package com.tim4it.whitehatgaming;
+package com.tim4it.chess;
 
-import com.tim4it.whitehatgaming.util.Moves;
-import com.tim4it.whitehatgaming.util.Pair;
+import com.tim4it.chess.util.Moves;
+import com.tim4it.chess.util.Pair;
 
 public interface Board {
 

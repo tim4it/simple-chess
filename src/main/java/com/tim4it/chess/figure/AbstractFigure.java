@@ -1,8 +1,8 @@
-package com.tim4it.whitehatgaming.figure;
+package com.tim4it.chess.figure;
 
-import com.tim4it.whitehatgaming.Board;
-import com.tim4it.whitehatgaming.empty.EmptyCell;
-import com.tim4it.whitehatgaming.util.Helper;
+import com.tim4it.chess.Board;
+import com.tim4it.chess.empty.EmptyCell;
+import com.tim4it.chess.util.Helper;
 import lombok.NonNull;
 
 public abstract class AbstractFigure implements Board {

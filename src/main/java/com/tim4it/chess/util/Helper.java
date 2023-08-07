@@ -1,14 +1,14 @@
-package com.tim4it.whitehatgaming.util;
+package com.tim4it.chess.util;
 
-import com.tim4it.whitehatgaming.Board;
-import com.tim4it.whitehatgaming.Color;
-import com.tim4it.whitehatgaming.empty.EmptyCell;
-import com.tim4it.whitehatgaming.figure.Bishop;
-import com.tim4it.whitehatgaming.figure.King;
-import com.tim4it.whitehatgaming.figure.Knight;
-import com.tim4it.whitehatgaming.figure.Pawn;
-import com.tim4it.whitehatgaming.figure.Queen;
-import com.tim4it.whitehatgaming.figure.Rook;
+import com.tim4it.chess.Board;
+import com.tim4it.chess.Color;
+import com.tim4it.chess.empty.EmptyCell;
+import com.tim4it.chess.figure.Bishop;
+import com.tim4it.chess.figure.King;
+import com.tim4it.chess.figure.Knight;
+import com.tim4it.chess.figure.Pawn;
+import com.tim4it.chess.figure.Queen;
+import com.tim4it.chess.figure.Rook;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 

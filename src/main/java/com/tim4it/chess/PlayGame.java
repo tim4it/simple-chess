@@ -1,15 +1,15 @@
-package com.tim4it.whitehatgaming;
+package com.tim4it.chess;
 
-import com.tim4it.whitehatgaming.empty.EmptyCell;
-import com.tim4it.whitehatgaming.util.Helper;
-import com.tim4it.whitehatgaming.util.Moves;
+import com.tim4it.chess.empty.EmptyCell;
+import com.tim4it.chess.util.Helper;
+import com.tim4it.chess.util.Moves;
 import com.whitehatgaming.UserInputFile;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
 
-import static com.tim4it.whitehatgaming.util.Helper.*;
+import static com.tim4it.chess.util.Helper.*;
 
 public class PlayGame {
 

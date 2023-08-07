@@ -1,9 +1,9 @@
-package com.tim4it.whitehatgaming.figure;
+package com.tim4it.chess.figure;
 
-import com.tim4it.whitehatgaming.Board;
-import com.tim4it.whitehatgaming.Color;
-import com.tim4it.whitehatgaming.util.Moves;
-import com.tim4it.whitehatgaming.util.Pair;
+import com.tim4it.chess.Board;
+import com.tim4it.chess.Color;
+import com.tim4it.chess.util.Moves;
+import com.tim4it.chess.util.Pair;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;

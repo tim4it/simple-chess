@@ -1,4 +1,4 @@
-package com.tim4it.whitehatgaming;
+package com.tim4it.chess;
 
 import java.io.File;
 

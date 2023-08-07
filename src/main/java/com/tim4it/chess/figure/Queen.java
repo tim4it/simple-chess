@@ -1,9 +1,9 @@
-package com.tim4it.whitehatgaming.figure;
+package com.tim4it.chess.figure;
 
-import com.tim4it.whitehatgaming.Board;
-import com.tim4it.whitehatgaming.Color;
-import com.tim4it.whitehatgaming.util.Moves;
-import com.tim4it.whitehatgaming.util.Pair;
+import com.tim4it.chess.Board;
+import com.tim4it.chess.Color;
+import com.tim4it.chess.util.Moves;
+import com.tim4it.chess.util.Pair;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -12,7 +12,7 @@ import lombok.Value;
 @Value
 @Builder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
-public class Rook extends AbstractFigure {
+public class Queen extends AbstractFigure {
 
     @NonNull
     Color color;
@@ -24,17 +24,18 @@ public class Rook extends AbstractFigure {
         var destinationRow = moves.getDestinationRow();
         var destinationColumn = moves.getDestinationColumn();
         if (isOutOfBoundaries(sourceRow, sourceColumn, destinationRow, destinationColumn)) {
-            return new Pair<>(false, "Wrong source and destination rook move: " + moves);
+            return new Pair<>(false, "Wrong source and destination queen move: " + moves);
         }
-        // Checking if the piece at the source coordinate is a rook
+        // Checking if the piece at the source coordinate is a queen
         if (!chessboard[sourceRow][sourceColumn].toString().equals(this.toString())) {
-            return new Pair<>(false, "Expected rook, got " + chessboard[sourceRow][sourceColumn].toString());
+            return new Pair<>(false, "Expected queen, got " + chessboard[sourceRow][sourceColumn].toString());
         }
         // Checking if the move is valid horizontally, vertically, or diagonally
-        if (sourceRow == destinationRow || sourceColumn == destinationColumn) {
+        if (sourceRow == destinationRow || sourceColumn == destinationColumn ||
+                Math.abs(sourceRow - destinationRow) == Math.abs(sourceColumn - destinationColumn)) {
             return isClearPath(chessboard, moves);
         }
-        return new Pair<>(false, "Invalid rook move " + moves);
+        return new Pair<>(false, "Invalid queen move " + moves);
     }
 
     /**
@@ -52,22 +53,25 @@ public class Rook extends AbstractFigure {
         if (sourceRow == destinationRow) {
             // Clear horizontally
             if (isPathNotClearStraight(chessboard, sourceColumn, destinationColumn, sourceRow, true)) {
-                return new Pair<>(false, "Invalid rook horizontal move " + moves);
+                return new Pair<>(false, "Invalid queen horizontal move " + moves);
             }
         } else if (sourceColumn == destinationColumn) {
             // Clear vertically
             if (isPathNotClearStraight(chessboard, sourceRow, destinationRow, sourceColumn, false)) {
-                return new Pair<>(false, "Invalid rook vertical move " + moves);
+                return new Pair<>(false, "Invalid queen vertical move " + moves);
             }
         } else {
-            return new Pair<>(false, "Invalid rook move " + moves);
+            // Clear diagonally
+            if (isPathNotClearDiagonal(chessboard, sourceRow, sourceColumn, destinationRow, destinationColumn)) {
+                return new Pair<>(false, "Invalid queen diagonal move " + moves);
+            }
         }
         // ensure that the destination cell is either empty or contains a piece of the opposing color
         var destinationCell = chessboard[destinationRow][destinationColumn];
         var destinationMoveCheck = destinationCell.toString().equals(EMPTY_CELL_STRING) ||
                 !destinationCell.getColor().equals(this.getColor());
         if (!destinationMoveCheck) {
-            return new Pair<>(false, "Invalid rook destination move " + moves);
+            return new Pair<>(false, "Invalid queen destination move " + moves);
         }
         return new Pair<>(true, null);
     }
@@ -76,11 +80,11 @@ public class Rook extends AbstractFigure {
     public String toString() {
         switch (getColor()) {
             case WHITE:
-                return "♖";
+                return "♕";
             case BLACK:
-                return "♜";
+                return "♛";
             default:
-                throw new IllegalStateException("Only two colors available for rook! " + getColor());
+                throw new IllegalStateException("Only two colors available for queen! " + getColor());
         }
     }
 }

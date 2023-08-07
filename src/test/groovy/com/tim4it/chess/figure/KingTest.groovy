@@ -1,14 +1,14 @@
-package com.tim4it.whitehatgaming.figure
+package com.tim4it.chess.figure
 
-import com.tim4it.whitehatgaming.Board
-import com.tim4it.whitehatgaming.util.Moves
+import com.tim4it.chess.Board
+import com.tim4it.chess.util.Moves
 import spock.lang.Specification
 
-import static com.tim4it.whitehatgaming.util.Helper.K
-import static com.tim4it.whitehatgaming.util.Helper.N
-import static com.tim4it.whitehatgaming.util.Helper.P
-import static com.tim4it.whitehatgaming.util.Helper.e
-import static com.tim4it.whitehatgaming.util.Helper.p
+import static com.tim4it.chess.util.Helper.K
+import static com.tim4it.chess.util.Helper.N
+import static com.tim4it.chess.util.Helper.P
+import static com.tim4it.chess.util.Helper.e
+import static com.tim4it.chess.util.Helper.p
 
 class KingTest extends Specification {
 

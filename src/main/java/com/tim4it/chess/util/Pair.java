@@ -1,4 +1,4 @@
-package com.tim4it.whitehatgaming.util;
+package com.tim4it.chess.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

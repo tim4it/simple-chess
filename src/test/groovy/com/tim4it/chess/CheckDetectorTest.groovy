@@ -1,8 +1,8 @@
-package com.tim4it.whitehatgaming
+package com.tim4it.chess
 
 import spock.lang.Specification
 
-import static com.tim4it.whitehatgaming.util.Helper.*
+import static com.tim4it.chess.util.Helper.*
 
 class CheckDetectorTest extends Specification {
 
